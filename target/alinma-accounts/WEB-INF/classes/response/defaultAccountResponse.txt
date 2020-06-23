@@ -1,9 +1,0 @@
-{
-    "msgRsHdr": {
-      "statusCode": "I000000",
-      "rqUID": "IB00aea875e83e5b4d93a74f5a326c1d48a3",
-      "echoData": "02386583203251648066"
-    },
-    "Body": {
-  }
-}
