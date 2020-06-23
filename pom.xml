@@ -15,9 +15,9 @@
 	<name>alinma-accounts</name>
 	<description>Alinma Retail Internet Banking - Accounts Microservice</description>
 <scm>
-        <connection>scm:git:eakad@github.dxc.com:eakad/alinma-accounts-rel.git</connection>
+        <connection>scm:git:eakad@github.com:E-Akad/alinma-accounts.git</connection>
     <tag>HEAD</tag>
-<url>https://github.dxc.com:eakad/alinma-accounts-rel.git</url>
+<url>https://github.com:E-Akad/alinma-accounts.git</url>
   </scm>
 <distributionManagement>
         <repository>
