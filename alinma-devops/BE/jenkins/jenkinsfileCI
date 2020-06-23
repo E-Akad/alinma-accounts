@@ -1,0 +1,112 @@
+pipeline {
+    agent {
+        label 'master'
+    }
+    stages {
+     stage('Clone the Code Repo') {
+        steps {
+            deleteDir()
+          script {
+            dir('Code') { //This directory will be created in jenkins workspace if it's not already created
+                echo "checkout BE code from Alinma Git"
+                stage('Checkout') {
+                  // specify branch you want to checkout from, credential ID name which you configured in jenkins console cerdentials section, and https URL of the repo from GITHUB console
+                git branch: 'dev', credentialsId: 'devGit', url: 'git@10.0.31.14:/home/git/Alinma-backend.git/${uservice}'
+                }
+            }
+          }
+        }
+     }
+     stage ('adding excute permission to scripts'){
+       steps {
+          script {
+              echo "Granting execute permission to shell scripts."
+              sh '''
+              cd Code
+              chmod +x alinma-devops/BE/shell/*
+              '''
+          }
+       }
+     }
+     stage ('Build'){
+            steps {
+                withMaven(
+                    maven: 'maven-3'
+                ){
+                sh '''
+                cd Code
+                mvn clean package -Dmaven.test.skip=true
+                '''
+                 }
+                 script {
+                     echo "Gathering Artifact Info."
+                     env.ARTIFACT_VERSION = sh (script: "${WORKSPACE}/Code/alinma-devops/BE/shell/getArtifactVersion.sh ${WORKSPACE} ${uservice}", returnStdout: true).trim()
+                     echo "ARTIFACT_VERSION: ${ARTIFACT_VERSION}"
+                     env.ARTIFACT_TYPE = sh (script: "${WORKSPACE}/Code/alinma-devops/BE/shell/getArtifactType.sh ${WORKSPACE} ${uservice}", returnStdout: true).trim()
+                     echo "ARTIFACT_TYPE: ${ARTIFACT_TYPE}"
+                 }                
+            }            
+     }
+    //  stage ('compare uservice version no'){
+    //    when {
+    //             expression {
+    //                 // Skip deployment stage for dependencies (jar files)
+    //                 return env.ARTIFACT_TYPE == 'war';
+    //             }
+    //    }
+    //    if (${uservice}* = /etc/ansible/deploy_service/DEV/artifacts/${uservice}*) {
+    //      throw new RuntimeException("pipeline failed because artifact Version no. needs to be incremented!")
+    //    }
+   
+
+    //  }
+     stage ('Unit Test'){
+            steps {
+                echo "Unit Test with maven"
+                // withMaven(
+                //     maven: 'maven-3'
+                // ){
+                // //dev will creat unit test class and will configure pom.xml with target test!
+                // //if condition for success or failure scenrio, for failure scinario it will stop the pipeline, if succeed it will move to the next stage
+                // sh '''
+                //     cd Code/${uservice}
+                //     mvn clean test
+                // '''
+                //sudo chown ansible:ansible /etc/ansible/deploy_service/DEV/artifacts/*.war
+                // }
+            }
+     }
+     stage ('copy artifacts to ansible source location and prepare for deployment') {
+       when {
+            expression {
+            // Skip deployment stage for dependencies (jar files)
+              return env.ARTIFACT_TYPE == 'war';
+            }
+       }
+       steps {
+         sh '''
+          ${WORKSPACE}/Code/alinma-devops/BE/shell/moveDeployable.sh
+          ${WORKSPACE}/Code/alinma-devops/BE/shell/removeVersionNo.sh
+          '''
+       }
+     }
+     stage ( 'Deployment with Ansible' ){
+       when {
+                expression {
+                    // Skip deployment stage for dependencies (jar files)
+                    return env.ARTIFACT_TYPE == 'war';
+                }
+       }
+       // deploy with ansible node
+            steps { echo "Deploying with Ansible"
+              node ('ansible'){
+                echo "Copying artifacts to ansible source location"    
+                    // Ansible playbook is passive, to activate reomve the "echo" command.
+                    sh'''
+                    echo ansible-playbook deploy_be.yml --extra-vars "server=${server} service=${uservice}"
+                    '''
+              }
+            }
+     }        
+    }
+}

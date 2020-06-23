@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustAcctsInqRs>
+    <MsgRsHdr>
+            <StatusCode>I000000</StatusCode>
+            <RqUID>ASCGeffd1c45d42647f6a98eac586614f167</RqUID>
+            <EchoData>06601460555231023781</EchoData>
+      </MsgRsHdr>
+      <Body>
+            <RecCtrlOut>
+                  <MatchedRecs>1</MatchedRecs>
+                  <SentRecs>1</SentRecs>
+            </RecCtrlOut>
+            <AcctsList>
+                  <AcctInfo>
+                        <AcctDtls>
+                              <AcctId>
+                                    <AcctNum>68200035</AcctNum>
+                                    <AcctType>CA</AcctType>
+                              </AcctId>
+                              <IBAN>SA5805000068200032425000</IBAN>
+                              <AcctName>الحساب الشخصي</AcctName>
+                              <AcctNickname>الحساب الشخصي</AcctNickname>
+                              <AcctStatus>نشط</AcctStatus>
+                              <AcctCur>SAR</AcctCur>
+                              <CardClassId>A1001</CardClassId>
+                        </AcctDtls>
+                  </AcctInfo>
+				  
+				  <AcctInfo>
+                        <AcctDtls>
+                              <AcctId>
+                                    <AcctNum>68200032</AcctNum>
+                                    <AcctType>CA</AcctType>
+                              </AcctId>
+                              <IBAN>SA0380000000608010167519</IBAN>
+                              <AcctName>الحساب الفرعي الاول</AcctName>
+                              <AcctNickname>الحساب الفرعي الاول</AcctNickname>
+                              <AcctStatus>نشط</AcctStatus>
+                              <AcctCur>SAR</AcctCur>
+                              <CardClassId>A1001</CardClassId>
+                        </AcctDtls>
+                  </AcctInfo>
+            </AcctsList>
+      </Body>
+</CustAcctsInqRs>

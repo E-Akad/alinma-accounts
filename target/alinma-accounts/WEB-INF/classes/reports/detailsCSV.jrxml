@@ -1,0 +1,996 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="detailsCSV"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="700"
+		 pageHeight="600"
+		 columnWidth="700"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isFloatColumnFooter="true"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 resourceBundle="report"
+		 whenResourceMissingType="Key"
+		 isIgnorePagination="true">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<style 
+		name="InmaStyleTextBox"
+		isDefault="false"
+		forecolor="#522D24"
+		backcolor="#E7DED0"
+		fill="Solid"
+		hAlign="Right"
+		vAlign="Middle"
+		fontName="Alinma TheSans"
+		fontSize="8"
+		pdfFontName="AlinmaTheSans-Plain.ttf"
+		pdfEncoding="Identity-H"
+		isPdfEmbedded="true"
+		isBlankWhenNull="true"
+	>
+					<box leftPadding="5" rightPadding="5">					<pen lineWidth="0.0" lineColor="#E7DED0"/>
+					<topPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<leftPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<bottomPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<rightPen lineWidth="0.0" lineColor="#E7DED0"/>
+</box>
+	</style>
+	<style 
+		name="InmaStyleColumnHeader"
+		isDefault="true"
+		forecolor="#FFFFFF"
+		backcolor="#330000"
+		hAlign="Center"
+		vAlign="Middle"
+		fontName="Alinma TheSans"
+		fontSize="7"
+		pdfFontName="AlinmaTheSans-Plain.ttf"
+		pdfEncoding="Identity-H"
+		isPdfEmbedded="true"
+		isBlankWhenNull="true"
+	>
+					<box>					<pen lineWidth="0.5" lineColor="#522D24"/>
+					<topPen lineWidth="0.5" lineColor="#522D24"/>
+					<leftPen lineWidth="0.5" lineColor="#522D24"/>
+					<bottomPen lineWidth="0.5" lineColor="#522D24"/>
+					<rightPen lineWidth="0.5" lineColor="#522D24"/>
+</box>
+	</style>
+	<style 
+		name="inmaStyleLabelAr"
+		isDefault="false"
+		forecolor="#522D24"
+		backcolor="#FFFFFF"
+		hAlign="Center"
+		vAlign="Middle"
+		fontName="SansSerif"
+		fontSize="10"
+		pdfFontName="AlinmaTheSans-Plain.ttf"
+		pdfEncoding="Identity-H"
+		isPdfEmbedded="true"
+		isBlankWhenNull="true"
+	>
+	</style>
+	<style 
+		name="InmaStyleTitleAr"
+		isDefault="false"
+		forecolor="#522D24"
+		hAlign="Left"
+		vAlign="Bottom"
+		fontName="Alinma TheSans"
+		fontSize="17"
+		pdfFontName="AlinmaTheSans-Plain.ttf"
+		pdfEncoding="Identity-H"
+		isPdfEmbedded="true"
+		isBlankWhenNull="true"
+	>
+	</style>
+	<style 
+		name="InmaStyleTitleEn"
+		isDefault="false"
+		forecolor="#91785B"
+		hAlign="Left"
+		vAlign="Top"
+		fontName="Alinma TheSans"
+		fontSize="17"
+		pdfFontName="AlinmaTheSans-Plain.ttf"
+		pdfEncoding="Identity-H"
+		isPdfEmbedded="true"
+		isBlankWhenNull="true"
+	>
+	</style>
+	<style 
+		name="inmaStyleLabelEn"
+		isDefault="false"
+		forecolor="#91785B"
+		pdfFontName="AlinmaTheSans-Plain.ttf"
+		pdfEncoding="Identity-H"
+		isPdfEmbedded="true"
+		isBlankWhenNull="true"
+	>
+	</style>
+	<style 
+		name="inmaStyleData"
+		isDefault="false"
+		forecolor="#000000"
+		backcolor="#CCCCFF"
+		pdfFontName="AlinmaTheSans-Plain.ttf"
+		pdfEncoding="Identity-H"
+		isPdfEmbedded="true"
+		isBlankWhenNull="true"
+	>
+	</style>
+	<style 
+		name="empty"
+		isDefault="false"
+	>
+	</style>
+
+	<parameter name="alinmaId" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="fullName" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="accountNum" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="accountCurr" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="openingBal" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="closingBal" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="totalCreditAmt" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="totalDebitAmt" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="cycleDate" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="withdrawCount" isForPrompting="false" class="java.lang.Integer"/>
+	<parameter name="depositCount" isForPrompting="false" class="java.lang.Integer"/>
+	<queryString language="xPath"><![CDATA[/PartyDtlsInqRs/Body/Party/PartyRels/PartyRel[RelTypeCode=67]]]></queryString>
+
+	<field name="transactionDateTime.gregorianString" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="runningBalance" class="java.lang.Double"/>
+	<field name="transactionType.code" class="java.lang.String"/>
+	<field name="amount.amount" class="java.lang.String"/>
+	<field name="transactionReferenceNumber" class="java.lang.String"/>
+	<field name="channelId.code" class="java.lang.String"/>
+
+	<variable name="Serial" class="java.lang.Integer" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[new Integer ($V{Serial}.intValue() + 1)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer ((int)0)]]></initialValueExpression>
+	</variable>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="250"  isSplitAllowed="false" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="82"
+						y="0"
+						width="80"
+						height="23"
+						key="textField-1"/>
+					<box leftPadding="5" rightPadding="5">					<pen lineWidth="0.0" lineColor="#E7DED0"/>
+					<topPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<leftPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<bottomPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<rightPen lineWidth="0.0" lineColor="#E7DED0"/>
+</box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{cycleDate}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="inmaStyleLabelAr"
+						mode="Opaque"
+						x="1"
+						y="0"
+						width="80"
+						height="23"
+						key="date-11"
+						stretchType="RelativeToTallestObject"/>
+					<box rightPadding="5"></box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="7" isPdfEmbedded ="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{StatmentDateEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="inmaStyleLabelAr"
+						mode="Opaque"
+						x="163"
+						y="0"
+						width="199"
+						height="23"
+						key="inmaid-1"
+						stretchType="RelativeToTallestObject"/>
+					<box rightPadding="5"></box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="7" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{AlinmaIDNumberPromptEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="363"
+						y="0"
+						width="97"
+						height="23"
+						key="textField-2"/>
+					<box leftPadding="5" rightPadding="5">					<pen lineWidth="0.0" lineColor="#E7DED0"/>
+					<topPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<leftPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<bottomPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<rightPen lineWidth="0.0" lineColor="#E7DED0"/>
+</box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{alinmaId}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Opaque"
+						x="163"
+						y="53"
+						width="199"
+						height="23"
+						key="name-1"/>
+					<box rightPadding="5">					<pen lineWidth="0.5" lineColor="#522D24"/>
+					<topPen lineWidth="0.5" lineColor="#522D24"/>
+					<leftPen lineWidth="0.5" lineColor="#522D24"/>
+					<bottomPen lineWidth="0.5" lineColor="#522D24"/>
+					<rightPen lineWidth="0.5" lineColor="#522D24"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="7" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{CustomerNameEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Opaque"
+						x="82"
+						y="53"
+						width="80"
+						height="23"
+						key="account-1"/>
+					<box rightPadding="5">					<pen lineWidth="0.5" lineColor="#522D24"/>
+					<topPen lineWidth="0.5" lineColor="#522D24"/>
+					<leftPen lineWidth="0.5" lineColor="#522D24"/>
+					<bottomPen lineWidth="0.5" lineColor="#522D24"/>
+					<rightPen lineWidth="0.5" lineColor="#522D24"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{AccountNumberEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Opaque"
+						x="1"
+						y="53"
+						width="80"
+						height="23"
+						key="currency-1"/>
+					<box rightPadding="5">					<pen lineWidth="0.5" lineColor="#522D24"/>
+					<topPen lineWidth="0.5" lineColor="#522D24"/>
+					<leftPen lineWidth="0.5" lineColor="#522D24"/>
+					<bottomPen lineWidth="0.5" lineColor="#522D24"/>
+					<rightPen lineWidth="0.5" lineColor="#522D24"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{CurrencyEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="1"
+						y="78"
+						width="80"
+						height="23"
+						key="textField-3"
+						stretchType="RelativeToTallestObject"/>
+					<box leftPadding="5" rightPadding="5">					<pen lineWidth="0.0" lineColor="#E7DED0"/>
+					<topPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<leftPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<bottomPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<rightPen lineWidth="0.0" lineColor="#E7DED0"/>
+</box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{accountCurr}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="163"
+						y="78"
+						width="199"
+						height="23"
+						key="textField-4"
+						stretchType="RelativeToTallestObject"/>
+					<box leftPadding="5" rightPadding="5">					<pen lineWidth="0.0" lineColor="#E7DED0"/>
+					<topPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<leftPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<bottomPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<rightPen lineWidth="0.0" lineColor="#E7DED0"/>
+</box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{fullName}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="82"
+						y="78"
+						width="80"
+						height="23"
+						key="textField-5"
+						stretchType="RelativeToTallestObject"/>
+					<box leftPadding="5" rightPadding="5">					<pen lineWidth="0.0" lineColor="#E7DED0"/>
+					<topPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<leftPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<bottomPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<rightPen lineWidth="0.0" lineColor="#E7DED0"/>
+</box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{accountNum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="inmaStyleLabelAr"
+						mode="Opaque"
+						x="1"
+						y="130"
+						width="80"
+						height="23"
+						key="CloseBalance-1"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5"></box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{CloseBalanceEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="inmaStyleLabelAr"
+						mode="Opaque"
+						x="1"
+						y="160"
+						width="80"
+						height="23"
+						key="DepositTotal-1"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5"></box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{DepositTotalEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="inmaStyleLabelAr"
+						mode="Opaque"
+						x="1"
+						y="190"
+						width="80"
+						height="23"
+						key="WithdrawTotal-1"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5"></box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{WithdrawTotalEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,###.##" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="82"
+						y="130"
+						width="80"
+						height="23"
+						key="textField-6"
+						positionType="Float"/>
+					<box leftPadding="5" rightPadding="5">					<pen lineWidth="0.0" lineColor="#E7DED0"/>
+					<topPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<leftPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<bottomPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<rightPen lineWidth="0.0" lineColor="#E7DED0"/>
+</box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[(new DecimalFormat("#,##0.00")).format(Double.parseDouble($P{closingBal}))]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,###.##" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="82"
+						y="160"
+						width="80"
+						height="23"
+						key="textField-7"
+						positionType="Float"/>
+					<box leftPadding="5" rightPadding="5">					<pen lineWidth="0.0" lineColor="#E7DED0"/>
+					<topPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<leftPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<bottomPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<rightPen lineWidth="0.0" lineColor="#E7DED0"/>
+</box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[(new DecimalFormat("#,##0.00")).format(Double.parseDouble($P{totalCreditAmt}))]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,###.##" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="82"
+						y="190"
+						width="80"
+						height="23"
+						key="textField-8"
+						positionType="Float"/>
+					<box leftPadding="5" rightPadding="5">					<pen lineWidth="0.0" lineColor="#E7DED0"/>
+					<topPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<leftPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<bottomPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<rightPen lineWidth="0.0" lineColor="#E7DED0"/>
+</box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[(new DecimalFormat("#,##0.00")).format(Double.parseDouble($P{totalDebitAmt}))]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="inmaStyleLabelAr"
+						mode="Opaque"
+						x="163"
+						y="160"
+						width="199"
+						height="23"
+						key="DepositCount-1"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5"></box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{DepositCountEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="inmaStyleLabelAr"
+						mode="Opaque"
+						x="163"
+						y="190"
+						width="199"
+						height="23"
+						key="WithdrawCount-1"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5"></box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{WithdrawCountEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="inmaStyleLabelAr"
+						mode="Opaque"
+						x="163"
+						y="130"
+						width="199"
+						height="23"
+						key="OpenBalance-1"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5"></box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{OpenBalanceEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,###.##" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="363"
+						y="130"
+						width="97"
+						height="23"
+						key="textField-9"
+						positionType="Float"/>
+					<box leftPadding="5" rightPadding="5">					<pen lineWidth="0.0" lineColor="#E7DED0"/>
+					<topPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<leftPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<bottomPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<rightPen lineWidth="0.0" lineColor="#E7DED0"/>
+</box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[(new DecimalFormat("#,##0.00")).format(Double.parseDouble($P{openingBal}))]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,###.##" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="363"
+						y="160"
+						width="97"
+						height="23"
+						key="textField-10"
+						positionType="Float"/>
+					<box leftPadding="5" rightPadding="5">					<pen lineWidth="0.0" lineColor="#E7DED0"/>
+					<topPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<leftPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<bottomPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<rightPen lineWidth="0.0" lineColor="#E7DED0"/>
+</box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[($P{depositCount}).toString()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,###.##" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="363"
+						y="190"
+						width="97"
+						height="23"
+						key="textField-11"
+						positionType="Float"/>
+					<box leftPadding="5" rightPadding="5">					<pen lineWidth="0.0" lineColor="#E7DED0"/>
+					<topPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<leftPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<bottomPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<rightPen lineWidth="0.0" lineColor="#E7DED0"/>
+</box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[($P{withdrawCount}).toString()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="inmaStyleLabelAr"
+						mode="Opaque"
+						x="1"
+						y="221"
+						width="80"
+						height="23"
+						key="WithdrawTotal-2"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5"></box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="inmaStyleLabelAr"
+						mode="Opaque"
+						x="1"
+						y="105"
+						width="80"
+						height="23"
+						key="WithdrawTotal-4"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5"></box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="inmaStyleLabelAr"
+						mode="Opaque"
+						x="1"
+						y="26"
+						width="80"
+						height="23"
+						key="WithdrawTotal-5"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5"></box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[]]></textFieldExpression>
+				</textField>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="false" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="51"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Band" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleColumnHeader"
+						mode="Opaque"
+						x="1"
+						y="0"
+						width="80"
+						height="23"
+						key="date-10"
+						positionType="Float"
+						isPrintInFirstWholeBand="true"/>
+					<box>					<pen lineWidth="0.5" lineColor="#522D24"/>
+					<topPen lineWidth="0.5" lineColor="#522D24"/>
+					<leftPen lineWidth="0.5" lineColor="#522D24"/>
+					<bottomPen lineWidth="0.5" lineColor="#522D24"/>
+					<rightPen lineWidth="0.5" lineColor="#522D24"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{DateEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Band" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleColumnHeader"
+						mode="Opaque"
+						x="163"
+						y="0"
+						width="199"
+						height="23"
+						key="desc-8"
+						positionType="Float"
+						isPrintInFirstWholeBand="true"/>
+					<box>					<pen lineWidth="0.5" lineColor="#522D24"/>
+					<topPen lineWidth="0.5" lineColor="#522D24"/>
+					<leftPen lineWidth="0.5" lineColor="#522D24"/>
+					<bottomPen lineWidth="0.5" lineColor="#522D24"/>
+					<rightPen lineWidth="0.5" lineColor="#522D24"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{descEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Band" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleColumnHeader"
+						mode="Opaque"
+						x="462"
+						y="0"
+						width="80"
+						height="23"
+						key="debit-10"
+						positionType="Float"
+						isPrintInFirstWholeBand="true"/>
+					<box>					<pen lineWidth="0.5" lineColor="#522D24"/>
+					<topPen lineWidth="0.5" lineColor="#522D24"/>
+					<leftPen lineWidth="0.5" lineColor="#522D24"/>
+					<bottomPen lineWidth="0.5" lineColor="#522D24"/>
+					<rightPen lineWidth="0.5" lineColor="#522D24"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{DebitEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Band" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleColumnHeader"
+						mode="Opaque"
+						x="545"
+						y="0"
+						width="80"
+						height="23"
+						key="credit-11"
+						positionType="Float"
+						isPrintInFirstWholeBand="true"/>
+					<box>					<pen lineWidth="0.5" lineColor="#522D24"/>
+					<topPen lineWidth="0.5" lineColor="#522D24"/>
+					<leftPen lineWidth="0.5" lineColor="#522D24"/>
+					<bottomPen lineWidth="0.5" lineColor="#522D24"/>
+					<rightPen lineWidth="0.5" lineColor="#522D24"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{creditEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Band" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleColumnHeader"
+						mode="Opaque"
+						x="627"
+						y="0"
+						width="70"
+						height="23"
+						key="balance-12"
+						positionType="Float"
+						isPrintInFirstWholeBand="true"/>
+					<box>					<pen lineWidth="0.5" lineColor="#522D24"/>
+					<topPen lineWidth="0.5" lineColor="#522D24"/>
+					<leftPen lineWidth="0.5" lineColor="#522D24"/>
+					<bottomPen lineWidth="0.5" lineColor="#522D24"/>
+					<rightPen lineWidth="0.5" lineColor="#522D24"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{balanceEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Band" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleColumnHeader"
+						mode="Opaque"
+						x="363"
+						y="0"
+						width="97"
+						height="23"
+						key="ref"
+						positionType="Float"
+						isPrintInFirstWholeBand="true"/>
+					<box>					<pen lineWidth="0.5" lineColor="#522D24"/>
+					<topPen lineWidth="0.5" lineColor="#522D24"/>
+					<leftPen lineWidth="0.5" lineColor="#522D24"/>
+					<bottomPen lineWidth="0.5" lineColor="#522D24"/>
+					<rightPen lineWidth="0.5" lineColor="#522D24"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{RefEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Band" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleColumnHeader"
+						mode="Opaque"
+						x="82"
+						y="0"
+						width="80"
+						height="23"
+						key="ref-1"
+						positionType="Float"
+						isPrintInFirstWholeBand="true"/>
+					<box>					<pen lineWidth="0.5" lineColor="#522D24"/>
+					<topPen lineWidth="0.5" lineColor="#522D24"/>
+					<leftPen lineWidth="0.5" lineColor="#522D24"/>
+					<bottomPen lineWidth="0.5" lineColor="#522D24"/>
+					<rightPen lineWidth="0.5" lineColor="#522D24"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{ChannelEn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="inmaStyleLabelAr"
+						mode="Opaque"
+						x="1"
+						y="23"
+						width="80"
+						height="23"
+						key="WithdrawTotal-3"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5"></box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[]]></textFieldExpression>
+				</textField>
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="20"  isSplitAllowed="false" >
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="163"
+						y="0"
+						width="199"
+						height="20"
+						key="desc-7"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5">					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#E7DED0"/>
+					<rightPen lineWidth="0.0"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[($F{description})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="1"
+						y="0"
+						width="80"
+						height="20"
+						key="date-8"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box leftPadding="5" rightPadding="5">					<pen lineWidth="0.0" lineColor="#E7DED0"/>
+					<topPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<leftPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<bottomPen lineWidth="0.0" lineColor="#E7DED0"/>
+					<rightPen lineWidth="0.0" lineColor="#E7DED0"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{transactionDateTime.gregorianString}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,###.##" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="462"
+						y="0"
+						width="80"
+						height="20"
+						key="debit-9"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5">					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[("DR".equals($F{transactionType.code}))? (new DecimalFormat("#,##0.00")).format(Double.parseDouble(($F{amount.amount}).substring(1))) : ""]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,###.##" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="545"
+						y="0"
+						width="80"
+						height="20"
+						key="credit-10"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5">					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[("CR".equals($F{transactionType.code}))? ( (new DecimalFormat("#,##0.00")).format(Double.parseDouble($F{amount.amount}))) : ""]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,###.##" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="627"
+						y="0"
+						width="70"
+						height="20"
+						key="balance-11"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5">					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[(new DecimalFormat("#,##0.00")).format($F{runningBalance})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,###.##" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="363"
+						y="0"
+						width="97"
+						height="20"
+						key="ref-value"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5">					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{transactionReferenceNumber}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,###.##" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="InmaStyleTextBox"
+						mode="Opaque"
+						x="82"
+						y="0"
+						width="80"
+						height="20"
+						key="ref-2"
+						stretchType="RelativeToTallestObject"
+						positionType="Float"/>
+					<box rightPadding="5">					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{channelId.code}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="false" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="false" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="false" >
+			</band>
+		</summary>
+</jasperReport>

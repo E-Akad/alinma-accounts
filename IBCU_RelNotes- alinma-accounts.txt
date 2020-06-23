@@ -1,0 +1,205 @@
+IBCU release notes
+=============
+This document tracks builds of Alinma-accounts MicroService and list contents.
+
+V1.0 Initial version --> 23.10.2019
+-----------------------------------
+list Alinma-accounts MicroService included :
+
+/v1/accounts/{account-number}/activation       			activateDormantAccount::27007000
+/v1/accounts/check-id/{id}                     			checkIdNumber::Implemented
+/v1/accounts/{account-number}/statement/stop-mail	    updateAccountStatementSetting::27002000
+/v1/accounts/cards									    getAccountsWithBalanceAndCards::26021000
+/v1/accounts/customer-deposit						    customerDeposistsInquiry::44100000
+/v1/accounts/{account-number}/transactions				getAccountTransactions::52020000
+/v1/accounts/{account-number}/transactions/report		exportTransactionReport
+/v1/cards												getCardsLightInquiry::16050300
+/v1/accounts/{account-number}/statement					getAccountStatementCycle::52010000
+/v1/accounts/{account-number}/statements				getAccountStatementDetails::52000000
+
+
+V1.1 --> DD.MM.YYYY
+-------------------
+# working on viewAccountTransaction and transaction details report
+# ViewActiveCreditCardListService more log and exception handling 
+
+V1.2 --> 24.10.2019
+-------------------
+# Fixing check id issue
+
+V1.3 --> 27.10.2019
+-------------------
+# AcctTrnsInqRqBody in alinma-models change primitive to wrapper
+# Fixing online account statement unmarshalling issue
+
+V1.4 --> 28.10.2019
+-------------------
+# Ahmed Nassar	Fixing duplication of header response on the online_account_statement
+
+
+V1.5 --> 30.10.2019
+-------------------
+# Ahmed Nassar Adding @XmlRootElement(name = "AcctMngRq") to AcctMngRq in Accounts MS
+
+V1.8 --> 05.11.2019
+-------------------
+# Ahmed Nassar -> Updating for the header issue
+# Ahmed Nassar -> reverting application.properties to head version as it was pointing to wrong IP
+
+V1.10 --> 08.11.2019
+-------------------
+# Ahmed Nassar -> Handling null cases in responses from ESB
+
+v1.11 ---> 10.11.2019
+---------------------
+#mina aiad -> handle no result in statement/report
+
+v1.12 ---> 11.11.2019
+---------------------
+#mkorkar fix card issue and retrieve credit cards in landing page
+
+v1.13 ---> 11.11.2019
+---------------------
+#Mina aiad syncronization issue for builds
+
+v1.14 ---> 12.11.2019
+---------------------
+#mkorkar uncomment getDormantAccount and enhance performance of getLOV
+
+v1.15 ---> 13.11.2019
+---------------------
+#mkorkar add value to card image path that back with account list
+
+v1.16 ---> 14.11.2019
+---------------------
+#Mina check LOV currency not to show null 
+
+v1.17 ---> 17.11.2019
+---------------------
+#mkorkar check LOV Channel not to be null and fix #Defect-80903 to handle returned time
+
+v1.18 --> 18.11.2019
+--------------
+#maiad add grouping to graphinfolist in statments endpoint
+
+v1.19 --> 18.11.2019
+--------------
+#maiad fix package issue
+
+v1.20 --> 18.11.2019
+--------------
+# Nassar Handling null body response at E-Statement page
+
+v1.21 --> 19.11.2019
+--------------
+# mina aiad fix repeated value in statments report and account number issue in the same report
+#mkorkar enhancement for LOV helper
+
+
+v1.22 --> 19.11.2019
+------------------
+# mina aiad fix statement report crash cast to string account num
+
+v1.23 --> 20.11.2019
+------------------
+#mkorkar handle transaction report issue
+
+v1.24 --> 20.11.2019
+------------------
+#mkorkar handle transaction report issue
+
+v1.25 --> 21.11.2019
+------------------
+#Heba Al Badry fix transaction report issue and add customer name and address to services 
+
+v1.26 --> 22.11.2019
+------------------
+#Heba Al Badry fix single transaction report issues.
+#Mohamed Sayed adding new changes of services module.
+
+
+v1.27 --> 25.11.2019
+------------------
+#Heba Al Badry fix  80957 Description issue.
+#Mina aiad fix CSV issue in reprot.
+
+Heba -- V1.28 --> 27.11.2019
+----------------------
+Change in Alinma-Services to return response with error status code in header & empty body in case response retrieved from ESB is null or incorrect class type.
+
+Heba -- V1.29 --> 08.12.2019
+----------------------
+Fix defects 80940 fix CSV issue customer name defect 
+
+mkorkar -- V1.30 --> 11.12.2019
+----------------------
+1-change card status to return  as a number
+2-modify login function to return customer name that has both Arabic and English names
+
+mkorkar -- V1.31 --> 15.12.2019
+----------------------
+fix defect #81062 add missing technical part to call getAccountWithoutBalance 
+to check specific field's value if the value = IB then mail stopped otherwise NOT
+
+mkorkar -- V1.32 --> 19.12.2019
+----------------------
+fix defect #80995 apply new accountWithBalanceAndCards YAML to FE can differentiate between dormant and active accoutns 
+
+maiad --v1.33 -->22.12.2019
+-------------------------
+fix defect #80987 for language issue in accounts/cards
+
+maiad --v1.34 -->23.12.2019
+-------------------------
+update avaiable balance in accounts/cards to be comma separated and changed to string 
+
+maiad --v1.35 -->24.12.2019
+-------------------------
+update and add lang header in accounts/cards 
+
+maiad --v1.36 -->25.12.2019
+-------------------------
+update lov call caching issue for arabic and english values
+update account/cards accountype to return both languages in same attribute
+
+abdelhalim --v1.37 -->25.12.2019
+------------
+remove hashmap from helperlov
+
+
+maiad --v1.38 -->26.12.2019
+-------------------------
+update account/cards accountype to return both languages to all accounts issue
+
+Abd El Haleem --v1.39 -->12.1.2020
+--------------------------
+intial release for sprint 2 
+
+Abd El Haleem --v1.40 -->13.1.2020
+--------------------------
+
+Update Accounts/cards Models and Component to camelCase
+
+Abd El Haleem --v1.41 -->15.1.2020
+--------------------------
+
+updating account/cards models to be camel case 
+
+Mina --v1.42 -->15.1.2020
+--------------------------
+
+add base url to /transfer and account with balance
+
+Mina --v1.43 -->18.1.2020
+--------------------------
+update accounts transfers model to dapt with new change in xml converter
+
+
+Mina --v1.44 -->22.1.2020
+--------------------------
+fix balance formate to have 2 digits after decicaml point
+
+
+nassar --v1.54 -->25.1.2020
+--------------------------
+fixing the defect 81055 

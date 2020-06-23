@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AcctMngRs>
+	<MsgRsHdr>
+		<StatusCode>I000000</StatusCode>
+		<RqUID>IB00a6f49f1cb7634942995e185a50ca8ab6</RqUID>
+		<SPRefNum>68200035200002</SPRefNum>
+		<EchoData>03909484867174199136</EchoData>
+	</MsgRsHdr>
+	<Body>
+		<AcctId>
+			<AcctNum>68200035200002</AcctNum>
+		</AcctId>
+	</Body>
+</AcctMngRs>

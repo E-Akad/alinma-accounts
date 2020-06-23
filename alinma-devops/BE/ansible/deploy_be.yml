@@ -1,0 +1,34 @@
+---
+
+- name: Deploy BE Services
+  hosts: devBE
+  serial:
+   - 1
+   - 2
+  remote_user: websphere
+  gather_facts: false
+  vars:
+    - source: /etc/ansible/deploy_service/DEV/artifacts
+    - service: 'user input'
+    - server: 'User Input' 
+#       - ['Configuration', 'alinma-configuration']
+#       - ['Registry', 'alinma-registry']
+#       - ['General', 'alinma-general']
+#       - ['Authentication', 'alinma-authentication']
+#       - ['Accounts', 'alinma-accounts']
+#       - ['SADAD', 'alinma-sadad']
+#       - ['Cards', 'alinma-cards']
+#       - ['Transfers-Management', 'alinma-transfers-management']
+#       - ['Customer-Management','alinma-customer-management']
+#       - ['Bills','alinma-bills']
+  tasks:
+    - name: remove deployed war file from DEV BE servers 
+      file:
+       path: /home/websphere/IBM/WebSphere/Liberty/usr/servers/{{server}}/dropins/{{service}}.war
+       state: absent
+
+    - name: Copy WAR files to BE
+      copy:
+        src: "{{source}}/{{service}}.war"
+        dest: /home/websphere/IBM/WebSphere/Liberty/usr/servers/{{server}}/dropins
+

@@ -1,0 +1,48 @@
+{
+  "accountTransactionInquiryResponse": {
+    "statusCode": "I000000",
+    "statusDesc": "success",
+    "recordCtrlOut": {
+      "matchedRecords": "4",
+      "sentRecords": "4"
+    },
+    "customerName":"Mohamed Ali",
+    "customerAddress":"123 k , washinton D.C USA",
+    "transactionList": {
+      "transactionInfo": [
+        {
+          "transactionRefNumber": "FT363425P8FL",
+          "transactionCodeDesc": "CR",
+          "description": "OUTGOING TRANSFER (SWIFT) from IB USD1300.00 rate 4.363 Commission SAR50.00  VAT SAR2.50 to test",
+          "memo": "Test",
+          "transactionDate": {
+   			"year" : "2012",
+			"month" : "12",
+			"day" : "3" 
+		  },
+          "transactionDatetime": "2019-12-07 10:02:00",
+          "channelDesc": "IB",
+          "debitAmount": "5724.4",
+          "creditAmount": "4564.4",
+          "amountWithCurrency":"3453.54 SAR"
+        },
+        {
+          "transactionRefNumber": "FT363425P8FL",
+          "transactionCodeDesc": "DR",
+          "description": "OUTGOING TRANSFER (SWIFT) from IB USD1300.00 rate 4.363 Commission SAR50.00  VAT SAR2.50 to test",
+          "memo": "Test",
+          "transactionDate": {
+   			"year" : "2036",
+			"month" : "12",
+			"day" : "3" 
+		  },
+          "transactionDatetime": "2020-12-07 10:02:00",
+          "channelDesc": "IB",
+          "debitAmount": "7897.6",
+          "creditAmount": "2342.9",
+          "amountWithCurrency":"7899.23 SAR"
+        }
+      ]
+    }
+  }
+}

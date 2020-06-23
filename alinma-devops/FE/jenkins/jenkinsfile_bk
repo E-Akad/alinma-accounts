@@ -1,0 +1,20 @@
+pipeline {
+    agent {
+        label 'master'
+    }
+    stages {
+      stage('Clone the Code Repo') {
+        steps {
+          script {
+            dir('Code') { //This directory will be created in jenkins workspace if it's not already created
+                echo "checkout BE code from alinma git"
+                stage('Checkout') {
+                  // specify branch you want to checkout from, credential ID name which you configured in jenkins console cerdentials section, and https URL of the repo from GITHUB console
+                git branch: 'alinma-accounts', credentialsId: 'devGit', url: 'git@10.0.31.14:/home/git/test'
+                }
+            }
+          }
+        }
+     }
+    }
+}

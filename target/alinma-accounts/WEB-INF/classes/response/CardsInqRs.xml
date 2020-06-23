@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CardsInqRs>
+
+	<MsgRsHdr>
+
+		<StatusCode>I000000</StatusCode>
+
+		<RqUID>IB00f6ac92647bc4430cbc81d76c60ee51b1</RqUID>
+
+		<EchoData>01497988344651436706</EchoData>
+
+	</MsgRsHdr>
+
+	<Body>
+
+		<RecCtrlOut>
+
+			<MatchedRecs>3</MatchedRecs>
+
+			<SentRecs>3</SentRecs>
+
+		</RecCtrlOut>
+
+		<CardsList>
+
+			<CardInfo>
+
+				<CardNum>1234</CardNum>
+				<!-- <CardNum>67025</CardNum> -->
+
+				<CardStatus>500</CardStatus>
+
+				<CardClassId>MCTS</CardClassId>
+
+				<CardTypeId>MCCT</CardTypeId>
+
+				<CardNickName />
+
+				<ExpDt>2023-06-30 00:00:00</ExpDt>
+
+				<IssueDt>2019-06-28 00:00:00</IssueDt>
+
+				<IsPrimaryCard>N</IsPrimaryCard>
+
+				<LnkdAcctNum>68200035</LnkdAcctNum>
+
+			</CardInfo>
+
+			<CardInfo>
+
+				<CardNum>1234</CardNum>
+<!-- 				<CardNum>67495</CardNum> -->
+
+				<CardStatus>0</CardStatus>
+
+				<CardClassId>MCTP</CardClassId>
+
+				<CardTypeId>MCCT</CardTypeId>
+
+				<CardNickName />
+
+				<ExpDt>2023-06-30 00:00:00</ExpDt>
+
+				<IssueDt>2019-06-28 00:00:00</IssueDt>
+
+				<IsPrimaryCard>Y</IsPrimaryCard>
+
+				<LnkdAcctNum>68200035</LnkdAcctNum>
+
+			</CardInfo>
+
+			<CardInfo>
+				<CardNum>1234</CardNum>
+
+				<CardClassId>VDCP</CardClassId>
+
+				<CardNickName />
+
+				<ExpDt>2021-09-30 00:00:00</ExpDt>
+
+				<IssueDt>2017-12-05 00:00:00</IssueDt>
+
+				<IsPrimaryCard>Y</IsPrimaryCard>
+
+				<LnkdAcctNum>68200032</LnkdAcctNum>
+
+			</CardInfo>
+
+		</CardsList>
+
+	</Body>
+
+</CardsInqRs>
