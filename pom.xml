@@ -15,20 +15,19 @@
 	<name>alinma-accounts</name>
 	<description>Alinma Retail Internet Banking - Accounts Microservice</description>
 
-	<repository>
-	<id>alinmaa-server</id>
-	<url>sftp://msftp@192.168.4.81/data/msftp/upload</url>
-	</repository>
 
 <scm>
         <connection>scm:git:ssh://git@github.com/E-Akad/alinma-accounts.git</connection>
     <tag>HEAD</tag>
   </scm>
 <distributionManagement>
+
         <repository>
-            <id>artifact-repository</id>
-            <url>your-artifact-repo-url</url>
+        <id>alinmaa-server</id>
+        <url>sftp://msftp@192.168.4.81/data/msftp/upload</url>
         </repository>
+
+
     </distributionManagement>
 
 
