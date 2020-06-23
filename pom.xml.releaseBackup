@@ -10,13 +10,12 @@
 	</parent>
 	<groupId>com.alinma.rib</groupId>
 	<artifactId>alinma-accounts</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>2.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>alinma-accounts</name>
 	<description>Alinma Retail Internet Banking - Accounts Microservice</description>
 <scm>
         <connection>scm:git:ssh://git@github.com/E-Akad/alinma-accounts.git</connection>
-    <tag>HEAD</tag>
 <!--url>/var/lib/jenkins</url-->
   </scm>
 <distributionManagement>
