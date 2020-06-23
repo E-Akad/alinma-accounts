@@ -19,7 +19,6 @@
 	<id>alinmaa-server</id>
 	<url>sftp://msftp@192.168.4.81/data/msftp/upload</url>
 	</repository>
-	</distributionManagement>
 
 <scm>
         <connection>scm:git:ssh://git@github.com/E-Akad/alinma-accounts.git</connection>
