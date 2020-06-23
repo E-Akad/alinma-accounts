@@ -17,7 +17,7 @@
 <scm>
         <connection>scm:git:ssh://git@github.com/E-Akad/alinma-accounts.git</connection>
     <tag>HEAD</tag>
-<url>/var/lib/jenkins</url>
+<!--url>/var/lib/jenkins</url-->
   </scm>
 <distributionManagement>
         <repository>
