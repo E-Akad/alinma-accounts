@@ -10,14 +10,12 @@
 	</parent>
 	<groupId>com.alinma.rib</groupId>
 	<artifactId>alinma-accounts</artifactId>
-	<version>3.0.2-SNAPSHOT</version>
+	<version>4.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>alinma-accounts</name>
 	<description>Alinma Retail Internet Banking - Accounts Microservice</description>
 <scm>
         <connection>scm:git:ssh://git@github.com/E-Akad/alinma-accounts.git</connection>
-<!--url>/var/lib/jenkins</url-->
-    <tag>HEAD</tag>
   </scm>
 <distributionManagement>
         <repository>
@@ -96,7 +94,7 @@
 	<build>
 		<finalName>${project.name}</finalName>
        <plugins>
-            <plugin>
+<!--            <plugin>
                 <artifactId>maven-scm-plugin</artifactId>
                 <version>1.9.5</version>
                 <configuration>
@@ -104,7 +102,12 @@
                 <localCheckout>true</localCheckout>
          <pushChanges>false</pushChanges>
         </configuration>
-            </plugin>
+            </plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.2</version>
+			</plugin>
         </plugins>
 	</build>
 
